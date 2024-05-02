@@ -4,8 +4,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 const Accessories = () => {
     const [accessories, setAccessories] = useState([]);
-    const [selectedAccessory, setSelectedAccessory] = useState(null); // State to store selected accessory
-    const [quantity, setQuantity] = useState(1); // State to store quantity
+    const [selectedAccessory, setSelectedAccessory] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         const fetchAccessories = async () => {
@@ -22,13 +22,11 @@ const Accessories = () => {
         fetchAccessories();
     }, []);
 
-    // Function to handle image click and set selectedAccessory state
     const handleImageClick = (accessory) => {
         setSelectedAccessory(accessory);
         document.getElementById('accessory_modal').showModal();
     };
 
-    // Function to handle quantity change
     const handleQuantityChange = (change) => {
         setQuantity(prevQuantity => prevQuantity + change);
     };
@@ -45,7 +43,6 @@ const Accessories = () => {
                     </div>
                 ))}
             </div>
-            {/* Modal */}
             {selectedAccessory && (
                 <dialog id="accessory_modal" className="modal">
                     <div className="modal-box">
