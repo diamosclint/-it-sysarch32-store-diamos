@@ -4,8 +4,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 const Vinyls = () => {
     const [vinyls, setVinyls] = useState([]);
-    const [selectedVinyl, setSelectedVinyl] = useState(null); // State to store selected vinyl
-    const [quantity, setQuantity] = useState(1); // State to store quantity
+    const [selectedVinyl, setSelectedVinyl] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         const fetchVinyls = async () => {
@@ -22,13 +22,11 @@ const Vinyls = () => {
         fetchVinyls();
     }, []);
 
-    // Function to handle image click and set selectedVinyl state
     const handleImageClick = (vinyl) => {
         setSelectedVinyl(vinyl);
         document.getElementById('vinyl_modal').showModal();
     };
 
-    // Function to handle quantity change
     const handleQuantityChange = (change) => {
         setQuantity(prevQuantity => prevQuantity + change);
     };
@@ -45,7 +43,6 @@ const Vinyls = () => {
                     </div>
                 ))}
             </div>
-            {/* Modal */}
             {selectedVinyl && (
                 <dialog id="vinyl_modal" className="modal">
                     <div className="modal-box">
