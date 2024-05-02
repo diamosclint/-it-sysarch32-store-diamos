@@ -7,7 +7,7 @@ function Navbar() {
             </div>
             <div className="h-10 bg-dark-gray border border-slate-200 ">
                 <ul className="flex justify-center gap-10 items-center mt-2">
-                    <li className="text-white text-sm">Shirts</li>
+                    <li className="text-white text-sm"> <a href="#apparels-section">Shirts</a></li>
                     <li className="text-white text-sm">Accessories</li>
                     <li className="text-white text-sm">Vinyls</li>
                     <li className="text-white text-sm">More</li>
