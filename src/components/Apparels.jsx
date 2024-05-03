@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
-const Apparels = () => {
+const Apparels = ({ addToBasket }) => {
     const [apparels, setApparels] = useState([]);
     const [selectedApparel, setSelectedApparel] = useState(null); // State to store selected apparel
 
@@ -24,6 +24,11 @@ const Apparels = () => {
     const handleImageClick = (apparel) => {
         setSelectedApparel(apparel);
         document.getElementById('my_modal_1').showModal();
+    };
+
+    const handleAddToCart = () => {
+        addToBasket(selectedApparel);
+        document.getElementById('my_modal_1').close();
     };
 
     return (
@@ -71,7 +76,7 @@ const Apparels = () => {
                                     <div className="w-4 h-4 rounded-full bg-gray-500"></div>
                                 </div>
                                 <div className='mt-10 bg-dark-gray rounded-full py-2 px-4 hover:bg-black transition duration-300 ease-in-out'>
-                                    <button className='text-white text-sm ml-0.5 items-center text-center justify-center font-semibold'>Add To Cart</button>
+                                    <button className='text-white text-sm ml-0.5 items-center text-center justify-center font-semibold' onClick={handleAddToCart}>Add To Cart</button>
                                 </div>
                             </div>
                         </div>

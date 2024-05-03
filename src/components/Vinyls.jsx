@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
-const Vinyls = () => {
+const Vinyls = ({ addToBasket }) => {
     const [vinyls, setVinyls] = useState([]);
     const [selectedVinyl, setSelectedVinyl] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -31,6 +31,11 @@ const Vinyls = () => {
         setQuantity(prevQuantity => prevQuantity + change);
     };
 
+    const handleAddToCart = () => {
+        addToBasket({ ...selectedVinyl, quantity });
+        document.getElementById('vinyl_modal').close();
+    };
+
     return (
         <div className='max-w-7xl mx-auto px-6 mt-20 mb-40'>
             <h1 className='text-3xl font-semibold mt-10 mb-10'>Vinyls</h1>
@@ -55,6 +60,7 @@ const Vinyls = () => {
                             <span className="mx-2">{quantity}</span>
                             <button className="btn btn-sm" onClick={() => handleQuantityChange(1)}>+</button>
                         </div>
+                        <button className='mt-6 bg-dark-gray text-white px-4 rounded-full py-2' onClick={handleAddToCart}>Add to Cart</button>
                         <div className="modal-action">
                             <form method="dialog">
                                 <button className="btn" onClick={() => document.getElementById('vinyl_modal').close()}>Close</button>

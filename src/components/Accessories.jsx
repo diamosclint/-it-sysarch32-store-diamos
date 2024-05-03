@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
-const Accessories = () => {
+const Accessories = ({ addToBasket }) => {
     const [accessories, setAccessories] = useState([]);
     const [selectedAccessory, setSelectedAccessory] = useState(null);
-    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         const fetchAccessories = async () => {
@@ -27,8 +26,9 @@ const Accessories = () => {
         document.getElementById('accessory_modal').showModal();
     };
 
-    const handleQuantityChange = (change) => {
-        setQuantity(prevQuantity => prevQuantity + change);
+    const handleAddToCart = () => {
+        addToBasket(selectedAccessory);
+        document.getElementById('accessory_modal').close();
     };
 
     return (
@@ -51,12 +51,8 @@ const Accessories = () => {
                         <img className='h-48 w-auto object-cover mt-5 ml-32 justify-center' src={selectedAccessory.image} alt={selectedAccessory.name} />
                         <p className="mt-2">Price: ${selectedAccessory.price}</p>
                         <div className="flex items-center mt-6">
-                            <h3 className='font-semibold mr-2'>Quantity</h3>
-                            <button className="btn btn-sm gap-2" onClick={() => handleQuantityChange(-1)}>-</button>
-                            <span className="mx-2">{quantity}</span>
-                            <button className="btn btn-sm" onClick={() => handleQuantityChange(1)}>+</button>
+                            <button className="bg-dark-gray font-semibold px-4 py-3 text-sm rounded-full text-white gap-2" onClick={handleAddToCart}>Add to Cart</button>
                         </div>
-                        <button className='mt-6 bg-dark-gray text-white px-4 rounded-full py-2'>Add to Cart</button>
                         <div className="modal-action">
                             <form method="dialog">
                                 <button className="btn" onClick={() => document.getElementById('accessory_modal').close()}>Close</button>
