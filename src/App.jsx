@@ -35,7 +35,7 @@ function App() {
   const handleClick = async () => {
     const stripe = await stripePromise;
 
-    const response = await fetch('http://localhost:4000/create-checkout-session', {
+    const response = await fetch('http://34.173.237.235/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
